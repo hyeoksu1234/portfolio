@@ -24,7 +24,6 @@ var projects = [
       '피드백 루프 시스템: ActionLog → OutcomeMeasurement → PatternLearning → RuleEngine',
       '프롬프트 A/B 테스트 시스템으로 AI 분석 품질 지속 개선',
       'Canvas 기반 네트워크 복잡도 시각화, 정렬 매트릭스 차트',
-      'GSAP + Canvas 키네틱 타이포그래피 모션 그래픽 (브랜드 영상)',
       '임팩트 투자 서류심사 12:1 경쟁률 통과, 최종 라운드 진출'
     ],
     lesson: '"만들 수 있다"와 "시장이 원한다"는 다른 문제. 가설을 세우면 반드시 데이터로 검증하는 습관.'
@@ -97,17 +96,25 @@ var projects = [
   {
     id: 'coin-indicator',
     title: '코인/주식 인디케이터',
-    subtitle: 'AI 기반 코인/주식 보조지표 시스템',
+    subtitle: 'EMA 크로스오버 + 다중 필터 기반 매매 보조지표 시스템',
     category: 'dev',
-    role: '개발',
+    role: '기획 · 개발',
     period: '2024',
-    stack: ['Python', 'AI', 'Data Analysis'],
+    stack: ['Pine Script v6', 'TradingView', 'Technical Analysis'],
     liveUrl: '',
     githubUrl: '',
     thumbnail: 'img/project/indicator/1.png',
     images: ['img/project/indicator/1.png'],
-    details: [],
-    lesson: ''
+    details: [
+      'Fast/Slow/Trend 3중 EMA 크로스오버 기반 매수·매도 시그널 생성',
+      'RSI 필터 (Long ≥ 55, Short ≤ 45) + 거래량 SMA 필터로 노이즈 제거',
+      'ATR 기반 자동 손절/익절 가이드 라인 (Risk/Reward 비율 설정 가능)',
+      '캔들 확정(Close) 기반 시그널 확인으로 허위 시그널 방지',
+      '추세 배경색 시각화 (상승: 녹색, 하락: 적색) + BUY/SELL 라벨',
+      'Auto-clear 옵션: 손절/익절 도달 시 가이드 자동 초기화',
+      'TradingView Alert 연동 (Long/Short/Any Signal)'
+    ],
+    lesson: '기술적 지표는 도구일 뿐, 리스크 관리와 원칙 준수가 실전에서의 핵심.'
   },
   {
     id: 'linkus',
