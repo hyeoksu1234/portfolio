@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+
+# Tool artifacts
+.playwright-mcp/
+.superpowers/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+
+# Env files
+.env
+.env.*
+
+# Project assets
+# Ignore large PDFs in wedding project
+img/project/wedding_project/*.pdf

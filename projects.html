@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Su'studio</title>
+  <meta name="description" content="이혁수의 프로젝트 모음">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Theme: apply before render to prevent flash -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="nav-header" id="navHeader">
+    <nav class="nav-bar">
+      <a href="index.html" class="btn-back" aria-label="Go back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+      <a href="index.html" class="nav-brand">Su'studio</a>
+      <button class="theme-pill" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-pill-knob"></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section projects-section" style="padding-top: 7rem;">
+      <div class="container">
+        <h1 class="section-title display-font animate-in">Projects</h1>
+        <div class="filter-bar animate-in" style="--delay:100ms" role="tablist" aria-label="Project category filter">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-filter="dev" role="tab" aria-selected="false">Development</button>
+          <button class="filter-btn" data-filter="design" role="tab" aria-selected="false">Design</button>
+          <button class="filter-btn" data-filter="pd" role="tab" aria-selected="false">PD</button>
+        </div>
+        <div class="projects-grid" id="projectsGrid" aria-live="polite">
+          <!-- Cards rendered by projects.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <span class="footer-brand display-font">Su'studio</span>
+      <div class="footer-links">
+        <a href="mailto:artingeveryday@gmail.com">Email</a>
+        <a href="https://github.com/hyeoksu1234" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.instagram.com/ai_story.official" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 이혁수. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="projects.js"></script>
+</body>
+</html>

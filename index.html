@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이혁수 | Su'studio — Portfolio</title>
+  <meta name="description" content="사용자 문제를 디자인으로 정의하고, 코드로 해결하는 디자이너 출신 프론트엔드 개발자 이혁수의 포트폴리오">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hyeoksu1234.github.io/portfolio_website/">
+  <meta property="og:title" content="이혁수 | Su'studio — Portfolio">
+  <meta property="og:description" content="사용자 문제를 디자인으로 정의하고, 코드로 해결합니다.">
+  <meta property="og:image" content="https://hyeoksu1234.github.io/portfolio_website/img/my_photo/projects.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Theme: apply before render to prevent flash -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <!-- Skip link -->
+  <a href="#about" class="skip-link">Skip to About</a>
+
+  <!-- Header — Hamburger left, Brand center, Toggle right -->
+  <header class="nav-header" id="navHeader">
+    <nav class="nav-bar">
+      <!-- Menu Button (Left) -->
+      <div class="nav-menu-wrap">
+        <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+          <!-- Menu icon (3 lines) -->
+          <svg class="icon-menu" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          <!-- Close icon (X) -->
+          <svg class="icon-close" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <!-- Dropdown Menu -->
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="#" class="dropdown-link active">HOME</a>
+          <a href="projects.html" class="dropdown-link">PROJECTS</a>
+          <a href="#about" class="dropdown-link" data-section="about">ABOUT</a>
+          <a href="mailto:artingeveryday@gmail.com" class="dropdown-link">CONTACT</a>
+        </div>
+      </div>
+
+      <!-- Brand (Center) -->
+      <a href="#" class="nav-brand">Su'studio</a>
+
+      <!-- Theme Toggle Pill (Right) -->
+      <button class="theme-pill" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-pill-knob"></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <!-- Centered Main Name — Always Perfectly Centered -->
+      <div class="hero-center">
+        <div class="hero-typo-wrap">
+          <div class="hero-typo-line">
+            <span class="hero-big-text blur-text" data-blur-text="HYEOK" data-blur-by="letters" data-blur-delay="100"></span>
+          </div>
+          <div class="hero-typo-line hero-typo-line-2">
+            <span class="hero-big-text blur-text" data-blur-text="SU" data-blur-by="letters" data-blur-delay="100"></span>
+            <!-- Profile Picture -->
+            <div class="hero-photo-wrap">
+              <div class="hero-photo">
+                <img src="img/my_photo/hyeoksu.jpg" alt="이혁수 프로필 사진">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Tagline — Below Typography -->
+        <div class="hero-tagline-wrap">
+          <p class="hero-tagline blur-text" data-blur-text="사용자 문제를 디자인으로 정의하고, 코드로 해결합니다." data-blur-by="words" data-blur-delay="150"></p>
+        </div>
+        <div class="hero-cta animate-in" style="--delay:1000ms">
+          <a href="projects.html" class="btn btn-primary">Projects →</a>
+          <a href="https://github.com/hyeoksu1234" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+          <a href="mailto:artingeveryday@gmail.com" class="btn btn-outline">Email</a>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <button class="scroll-indicator animate-in" style="--delay:1400ms" aria-label="Scroll down" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <h2 class="section-title display-font animate-in">About</h2>
+
+        <!-- Intro -->
+        <div class="about-intro">
+          <div class="about-photo animate-in">
+            <img src="img/my_photo/hyeoksu.jpg" alt="이혁수 프로필 사진" loading="lazy">
+          </div>
+          <div class="about-text animate-in" style="--delay:100ms">
+            <h3 class="about-name">이혁수 <span class="about-brand">Lee Hyeok Su</span></h3>
+            <p class="about-quote">"세상에 이로움을 남기고 싶은 사람"</p>
+            <p>커뮤니케이션 디자인을 전공하며 메시지와 경험이 사람과 사회에 어떤 영향을 미치는지를 고민해 온 디자이너 출신 개발자입니다.</p>
+            <p>2년간 YouTube PD로 활동하며 콘텐츠 기획·연출·편집을 담당했고, 누적 2,000만 회 이상의 조회수를 기록했습니다. 이 과정에서 제작한 채널이 Forbes Korea 2020 Power YouTuber 100에 선정되며 콘텐츠가 사회에 미치는 긍정적 파급력을 직접 경험했습니다.</p>
+            <p>현재는 AI와 코딩을 활용한 서비스 개발에 집중하며, UI/UX 디자인을 넘어 서비스 흐름, 정보 구조, 인터랙션 설계까지 아우르는 역할을 수행하고 있습니다.</p>
+          </div>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="timeline-section">
+          <h3 class="subsection-title animate-in">Experience</h3>
+          <div class="timeline">
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2026 ~ 현재</span>
+              <div class="timeline-content">
+                <strong>Designer × Code Founder</strong>
+                <p>디자이너를 위한 바이브 코딩 커뮤니티</p>
+              </div>
+            </div>
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2025 ~ 현재</span>
+              <div class="timeline-content">
+                <strong>Q-ALIGN Co-founder & CEO</strong>
+                <p>조직 정렬 B2B SaaS 플랫폼 기획·개발</p>
+              </div>
+            </div>
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2021.09 – 2022.03</span>
+              <div class="timeline-content">
+                <strong>카론크리에이티브 PD</strong>
+                <p>피닉스박 방송 편집, 콘텐츠 기획 및 제작</p>
+              </div>
+            </div>
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2021.02 – 2021.06</span>
+              <div class="timeline-content">
+                <strong>다니엘 프로젝트 PD</strong>
+                <p>온라인 강의 영상 제작, YouTube 채널 촬영·편집</p>
+              </div>
+            </div>
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2020.03 – 2021.01</span>
+              <div class="timeline-content">
+                <strong>Pranky Friends YouTube PD</strong>
+                <p>14편 제작 · Forbes Korea 2020 Power YouTuber 100 선정</p>
+              </div>
+            </div>
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2020.01 – 2020.02</span>
+              <div class="timeline-content">
+                <strong>U.K ad 골프 광고 회사 인턴</strong>
+              </div>
+            </div>
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2019.04 – 2020.01</span>
+              <div class="timeline-content">
+                <strong>미노아이디 TOPTEN 인테리어 디자인</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="timeline-section">
+          <h3 class="subsection-title animate-in">Education</h3>
+          <div class="timeline">
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2026.02</span>
+              <div class="timeline-content"><strong>상명대학교 커뮤니케이션디자인과</strong> <span class="muted">졸업 수료</span></div>
+            </div>
+            <div class="timeline-item animate-in">
+              <span class="timeline-date">2018.02</span>
+              <div class="timeline-content"><strong>재현고등학교</strong> <span class="muted">졸업</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="techstack-section">
+          <h3 class="subsection-title animate-in">Tech Stack</h3>
+          <div class="techstack-grid">
+            <div class="techstack-group animate-in">
+              <span class="techstack-label">Core</span>
+              <div class="techstack-tags">
+                <span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span>
+              </div>
+            </div>
+            <div class="techstack-group animate-in">
+              <span class="techstack-label">State & Data</span>
+              <div class="techstack-tags">
+                <span class="tag">Context API</span><span class="tag">Supabase</span><span class="tag">Prisma</span><span class="tag">PostgreSQL</span>
+              </div>
+            </div>
+            <div class="techstack-group animate-in">
+              <span class="techstack-label">Infra</span>
+              <div class="techstack-tags">
+                <span class="tag">Vercel</span><span class="tag">AWS S3/CloudFront</span><span class="tag">Git</span>
+              </div>
+            </div>
+            <div class="techstack-group animate-in">
+              <span class="techstack-label">AI</span>
+              <div class="techstack-tags">
+                <span class="tag">Claude API</span><span class="tag">Multi-LLM Client</span><span class="tag">Cursor</span>
+              </div>
+            </div>
+            <div class="techstack-group animate-in">
+              <span class="techstack-label">Design</span>
+              <div class="techstack-tags">
+                <span class="tag">Figma</span><span class="tag">Photoshop</span><span class="tag">Illustrator</span><span class="tag">InDesign</span><span class="tag">After Effects</span><span class="tag">Cinema 4D</span><span class="tag">GSAP</span><span class="tag">Framer Motion</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <span class="footer-brand display-font">Su'studio</span>
+      <div class="footer-links">
+        <a href="mailto:artingeveryday@gmail.com">Email</a>
+        <a href="https://github.com/hyeoksu1234" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.instagram.com/ai_story.official" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="footer-copy">© 2026 이혁수. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
