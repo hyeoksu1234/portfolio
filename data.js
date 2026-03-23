@@ -18,9 +18,9 @@ var projects = [
     images: ['img/project/q-align/1.png'],
     details: [
       '리더십의 전략 의도와 팀원의 이해 사이 간극을 데이터로 시각화하는 대시보드 구현',
-      'Multi-LLM 자동 폴백 시스템 설계 (Groq → Anthropic → OpenAI → DeepSeek)',
+      'Multi-LLM 자동 폴백 시스템 설계 (Anthropic → OpenAI → DeepSeek)',
       'JWT 기반 인증 시스템 (Web: httpOnly 쿠키 / Electron: localStorage 분기)',
-      'Slack Bolt 통합 — 슬래시 커맨드, 모달 인터랙션으로 팀원 답변 수집',
+      'Slack Bolt 통합 — 슬래시 커맨드, 모달 인터랙션으로 팀원 답변 수집 (수정 중)',
       '피드백 루프 시스템: ActionLog → OutcomeMeasurement → PatternLearning → RuleEngine',
       '프롬프트 A/B 테스트 시스템으로 AI 분석 품질 지속 개선',
       'Canvas 기반 네트워크 복잡도 시각화, 정렬 매트릭스 차트',
