@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://portfolio-hyeoksu.vercel.app/sitemap.xml

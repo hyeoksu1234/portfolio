@@ -1,178 +1,129 @@
-/* ===================================================================
-   main.js — Portfolio home page interactions
-   =================================================================== */
+/* Shared interactions: theme, navigation, and progressive reveal. */
+(function() {
+  var navHeader = document.getElementById('navHeader');
+  var themeToggle = document.getElementById('themeToggle');
+  var hamburger = document.getElementById('navHamburger');
+  var dropdownMenu = document.getElementById('dropdownMenu');
 
-// ─── DOM References ──────────────────────────────────────────────
-var navHeader = document.getElementById('navHeader');
-var themeToggle = document.getElementById('themeToggle');
-var hamburger = document.getElementById('navHamburger');
-var dropdownMenu = document.getElementById('dropdownMenu');
-
-// ─── Scroll Animations (IntersectionObserver) ────────────────────
-var scrollObserver = null;
-
-function observeElements(elements) {
-  if (!scrollObserver) {
-    scrollObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          scrollObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
   }
 
-  elements.forEach(function(el) {
-    scrollObserver.observe(el);
-  });
-}
-
-// ─── Theme Toggle ────────────────────────────────────────────────
-themeToggle.addEventListener('click', function() {
-  var html = document.documentElement;
-  var current = html.getAttribute('data-theme');
-  if (current === 'dark') {
-    html.removeAttribute('data-theme');
-    localStorage.setItem('theme', 'light');
-  } else {
-    html.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
+  function syncThemeLabel() {
+    if (!themeToggle) return;
+    var dark = currentTheme() === 'dark';
+    themeToggle.setAttribute('aria-pressed', String(dark));
+    themeToggle.setAttribute('aria-label', dark ? '라이트 모드로 전환' : '다크 모드로 전환');
   }
-});
 
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-  if (!localStorage.getItem('theme')) {
-    if (e.matches) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-  }
-});
-
-// ─── Nav Scroll Behavior ─────────────────────────────────────────
-var scrollTicking = false;
-window.addEventListener('scroll', function() {
-  if (!scrollTicking) {
-    requestAnimationFrame(function() {
-      if (window.scrollY > 50) {
-        navHeader.classList.add('scrolled');
+  if (themeToggle) {
+    syncThemeLabel();
+    themeToggle.addEventListener('click', function() {
+      if (currentTheme() === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
       } else {
-        navHeader.classList.remove('scrolled');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
       }
-      scrollTicking = false;
+      syncThemeLabel();
     });
-    scrollTicking = true;
   }
-});
 
-// Active nav link tracking
-var navLinks = document.querySelectorAll('.dropdown-link[data-section]');
-var sections = document.querySelectorAll('#about');
+  var colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  if (colorScheme && colorScheme.addEventListener) {
+    colorScheme.addEventListener('change', function(event) {
+      if (localStorage.getItem('theme')) return;
+      if (event.matches) document.documentElement.setAttribute('data-theme', 'dark');
+      else document.documentElement.removeAttribute('data-theme');
+      syncThemeLabel();
+    });
+  }
 
-var sectionObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      var id = entry.target.id;
-      navLinks.forEach(function(link) {
-        if (link.dataset.section === id) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
+  if (navHeader) {
+    var scrollTicking = false;
+    window.addEventListener('scroll', function() {
+      if (scrollTicking) return;
+      requestAnimationFrame(function() {
+        navHeader.classList.toggle('scrolled', window.scrollY > 40);
+        scrollTicking = false;
       });
-    }
-  });
-}, { threshold: 0.2, rootMargin: '-80px 0px 0px 0px' });
-
-sections.forEach(function(s) { sectionObserver.observe(s); });
-
-// ─── Dropdown Menu ──────────────────────────────────────────────
-function closeDropdown() {
-  hamburger.classList.remove('open');
-  dropdownMenu.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', 'false');
-}
-
-hamburger.addEventListener('click', function(e) {
-  e.stopPropagation();
-  var isOpen = hamburger.classList.toggle('open');
-  dropdownMenu.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-});
-
-// Close dropdown on link click
-dropdownMenu.querySelectorAll('.dropdown-link').forEach(function(link) {
-  link.addEventListener('click', function() {
-    closeDropdown();
-  });
-});
-
-// Close dropdown on click outside
-document.addEventListener('click', function(e) {
-  if (!hamburger.contains(e.target) && !dropdownMenu.contains(e.target)) {
-    closeDropdown();
+      scrollTicking = true;
+    });
   }
-});
 
-// ─── BlurText Animation ──────────────────────────────────────────
-function initBlurText() {
-  var blurElements = document.querySelectorAll('.blur-text');
+  function closeDropdown() {
+    if (!hamburger || !dropdownMenu) return;
+    hamburger.classList.remove('open');
+    dropdownMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', '메뉴 열기');
+  }
 
-  blurElements.forEach(function(el) {
-    var text = el.getAttribute('data-blur-text');
-    var animateBy = el.getAttribute('data-blur-by') || 'words';
-    var delay = parseInt(el.getAttribute('data-blur-delay') || '50', 10);
-
-    if (!text) return;
-
-    var segments = animateBy === 'letters' ? text.split('') : text.split(' ');
-
-    // Clear element and build spans
-    el.textContent = '';
-
-    segments.forEach(function(segment, i) {
-      var span = document.createElement('span');
-      span.className = 'blur-char';
-      span.textContent = segment;
-      span.style.transitionDelay = (i * delay) + 'ms';
-
-      el.appendChild(span);
-
-      // Add space between words
-      if (animateBy === 'words' && i < segments.length - 1) {
-        var space = document.createTextNode('\u00A0');
-        el.appendChild(space);
-      }
+  if (hamburger && dropdownMenu) {
+    hamburger.addEventListener('click', function(event) {
+      event.stopPropagation();
+      var isOpen = hamburger.classList.toggle('open');
+      dropdownMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
     });
 
-    // Observe for viewport entry
+    dropdownMenu.querySelectorAll('.dropdown-link').forEach(function(link) {
+      link.addEventListener('click', closeDropdown);
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!hamburger.contains(event.target) && !dropdownMenu.contains(event.target)) closeDropdown();
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') closeDropdown();
+    });
+  }
+
+  function initBlurText() {
+    document.querySelectorAll('.blur-text').forEach(function(element) {
+      var text = element.getAttribute('data-blur-text');
+      var animateBy = element.getAttribute('data-blur-by') || 'words';
+      var delay = parseInt(element.getAttribute('data-blur-delay') || '50', 10);
+      if (!text) return;
+
+      var segments = animateBy === 'letters' ? text.split('') : text.split(' ');
+      element.textContent = '';
+      segments.forEach(function(segment, index) {
+        var span = document.createElement('span');
+        span.className = 'blur-char';
+        span.textContent = segment;
+        span.style.transitionDelay = (index * delay) + 'ms';
+        element.appendChild(span);
+        if (animateBy === 'words' && index < segments.length - 1) element.appendChild(document.createTextNode('\u00a0'));
+      });
+
+      requestAnimationFrame(function() {
+        element.querySelectorAll('.blur-char').forEach(function(character) { character.classList.add('visible'); });
+      });
+    });
+  }
+
+  var revealElements = document.querySelectorAll('.animate-in');
+  document.querySelectorAll('.hero .animate-in').forEach(function(element) {
+    element.classList.add('visible');
+  });
+  if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var chars = el.querySelectorAll('.blur-char');
-          chars.forEach(function(c) {
-            c.classList.add('visible');
-          });
-          observer.unobserve(el);
-        }
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
+    revealElements.forEach(function(element) {
+      if (!element.closest('.hero')) observer.observe(element);
+    });
+  } else {
+    revealElements.forEach(function(element) { element.classList.add('visible'); });
+  }
 
-    observer.observe(el);
-  });
-}
-
-// ─── Init ────────────────────────────────────────────────────────
-(function init() {
-  // BlurText hero animation
   initBlurText();
-
-  observeElements(document.querySelectorAll('main .animate-in'));
-
-  // Hero elements animate immediately via CSS transition-delay
-  document.querySelectorAll('.hero .animate-in, .nav-header.animate-in').forEach(function(el) {
-    el.classList.add('visible');
-  });
 })();

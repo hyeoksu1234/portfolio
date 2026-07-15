@@ -1,0 +1,11 @@
+# Keep source artwork in Git, but deploy only optimized runtime assets.
+img/**/*.png
+img/**/*.jpg
+img/**/*.jpeg
+
+!img/my_photo/projects-og.jpg
+
+# Keep source notes and editor settings out of the public deployment.
+docs/
+CLAUDE.md
+.vscode/

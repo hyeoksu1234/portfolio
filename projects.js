@@ -1,154 +1,91 @@
-/* ===================================================================
-   projects.js — Projects listing page
-   Project data loaded from data.js
-   =================================================================== */
+/* Project listing: native links, role filters, and evidence status. */
+(function() {
+  var grid = document.getElementById('projectsGrid');
+  var filterButtons = document.querySelectorAll('.filter-btn');
+  if (!grid || typeof projects === 'undefined') return;
 
-// ─── DOM References ──────────────────────────────────────────────
-var grid = document.getElementById('projectsGrid');
-var navHeader = document.getElementById('navHeader');
-var themeToggle = document.getElementById('themeToggle');
+  function createElement(tag, className, text) {
+    var element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text != null) element.textContent = text;
+    return element;
+  }
 
-// ─── Helpers ─────────────────────────────────────────────────────
-function createEl(tag, className, text) {
-  var el = document.createElement(tag);
-  if (className) el.className = className;
-  if (text) el.textContent = text;
-  return el;
-}
+  function createImage(project) {
+    var image = document.createElement('img');
+    image.src = project.thumbnail;
+    image.alt = project.title + ' 대표 화면';
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    return image;
+  }
 
-function createImg(src, alt) {
-  var img = document.createElement('img');
-  img.src = src;
-  img.alt = alt;
-  img.loading = 'lazy';
-  return img;
-}
+  function repositoryLabel(project) {
+    if (project.repository.status === 'public' || project.repository.status === 'public-shell') return 'GitHub 공개';
+    if (project.repository.status === 'private') return 'Private repo';
+    if (project.repository.status === 'verifying') return 'Repo 검증 중';
+    return '근거 범위 표시';
+  }
 
-// ─── Card Rendering ─────────────────────────────────────────────
-function renderCards(filter) {
-  grid.textContent = '';
-  var filtered = filter === 'all'
-    ? [].concat(projects).sort(function(a, b) { return categoryOrder[a.category] - categoryOrder[b.category]; })
-    : projects.filter(function(p) { return p.category === filter; });
-
-  filtered.forEach(function(project, i) {
-    var card = document.createElement('article');
-    card.className = 'project-card animate-in';
-    card.style.setProperty('--delay', (i * 80) + 'ms');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-label', project.title + ' 프로젝트 상세 보기');
-
-    // Thumbnail
-    var thumbWrap = createEl('div', 'card-thumb');
-    thumbWrap.appendChild(createImg(project.thumbnail, project.title + ' 썸네일'));
-    card.appendChild(thumbWrap);
-
-    // Info
-    var info = createEl('div', 'card-info');
-    info.appendChild(createEl('span', 'card-category', categoryLabels[project.category]));
-    info.appendChild(createEl('h3', 'card-title', project.title));
-    info.appendChild(createEl('p', 'card-subtitle', project.subtitle));
-
-    var tags = createEl('div', 'card-tags');
-    project.stack.slice(0, 3).forEach(function(s) {
-      tags.appendChild(createEl('span', 'tag', s));
-    });
-    info.appendChild(tags);
-    card.appendChild(info);
-
-    card.addEventListener('click', function() { location.href = 'project.html?id=' + project.id; });
-    card.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        location.href = 'project.html?id=' + project.id;
-      }
-    });
-
-    grid.appendChild(card);
-  });
-
-  // Observe new cards for scroll animation
-  observeElements(grid.querySelectorAll('.animate-in'));
-}
-
-// ─── Scroll Animations ──────────────────────────────────────────
-var scrollObserver = null;
-
-function observeElements(elements) {
-  if (!scrollObserver) {
-    scrollObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          scrollObserver.unobserve(entry.target);
-        }
+  function renderCards(filter) {
+    grid.textContent = '';
+    var filtered = projects
+      .filter(function(project) { return filter === 'all' || project.category === filter; })
+      .sort(function(a, b) {
+        var categoryDifference = categoryOrder[a.category] - categoryOrder[b.category];
+        if (categoryDifference !== 0) return categoryDifference;
+        return Number(b.featured) - Number(a.featured);
       });
-    }, { threshold: 0.1 });
+
+    filtered.forEach(function(project, index) {
+      var card = document.createElement('a');
+      card.href = '/projects/' + project.id + '/';
+      card.className = 'project-card animate-in';
+      card.style.setProperty('--delay', (index * 60) + 'ms');
+      card.setAttribute('aria-label', project.title + ' 프로젝트 상세 보기');
+
+      var thumb = createElement('div', 'card-thumb');
+      thumb.appendChild(createImage(project));
+      card.appendChild(thumb);
+
+      var info = createElement('div', 'card-info');
+      var topline = createElement('div', 'card-topline');
+      topline.appendChild(createElement('span', 'card-category', categoryLabels[project.category]));
+      topline.appendChild(createElement('span', 'card-status', project.status));
+      info.appendChild(topline);
+      info.appendChild(createElement('h2', 'card-title', project.title));
+      info.appendChild(createElement('p', 'card-subtitle', project.subtitle));
+      info.appendChild(createElement('p', 'card-role', project.role));
+
+      var tags = createElement('div', 'card-tags');
+      project.stack.slice(0, 3).forEach(function(item) { tags.appendChild(createElement('span', 'tag', item)); });
+      info.appendChild(tags);
+
+      var proof = createElement('div', 'card-proof');
+      proof.appendChild(createElement('span', null, project.evidence.length + ' evidence'));
+      proof.appendChild(createElement('span', null, repositoryLabel(project)));
+      proof.appendChild(createElement('span', 'card-arrow', 'View case →'));
+      info.appendChild(proof);
+
+      card.appendChild(info);
+      grid.appendChild(card);
+      requestAnimationFrame(function() { card.classList.add('visible'); });
+    });
+
+    if (!filtered.length) grid.appendChild(createElement('p', 'empty-state', '이 역할에 해당하는 프로젝트가 아직 없습니다.'));
   }
 
-  elements.forEach(function(el) {
-    scrollObserver.observe(el);
+  filterButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      filterButtons.forEach(function(item) {
+        item.classList.remove('active');
+        item.setAttribute('aria-selected', 'false');
+      });
+      button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+      renderCards(button.dataset.filter);
+    });
   });
-}
 
-// ─── Filter ──────────────────────────────────────────────────────
-var filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var filter = btn.dataset.filter;
-
-    filterBtns.forEach(function(b) {
-      b.classList.remove('active');
-      b.setAttribute('aria-selected', 'false');
-    });
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-
-    // Animate out
-    var cards = grid.querySelectorAll('.project-card');
-    cards.forEach(function(c) {
-      c.style.opacity = '0';
-      c.style.transform = 'scale(0.95)';
-    });
-
-    setTimeout(function() {
-      renderCards(filter);
-    }, 200);
-  });
-});
-
-// ─── Theme Toggle ────────────────────────────────────────────────
-themeToggle.addEventListener('click', function() {
-  var html = document.documentElement;
-  var current = html.getAttribute('data-theme');
-  if (current === 'dark') {
-    html.removeAttribute('data-theme');
-    localStorage.setItem('theme', 'light');
-  } else {
-    html.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-  }
-});
-
-// ─── Nav Scroll Behavior ─────────────────────────────────────────
-var scrollTicking = false;
-window.addEventListener('scroll', function() {
-  if (!scrollTicking) {
-    requestAnimationFrame(function() {
-      if (window.scrollY > 50) {
-        navHeader.classList.add('scrolled');
-      } else {
-        navHeader.classList.remove('scrolled');
-      }
-      scrollTicking = false;
-    });
-    scrollTicking = true;
-  }
-});
-
-// ─── Init ────────────────────────────────────────────────────────
-(function init() {
   renderCards('all');
-  observeElements(document.querySelectorAll('.animate-in:not(.project-card)'));
 })();

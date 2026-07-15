@@ -1,60 +1,41 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## 개발 명령어
 
 ```bash
-npm run dev    # 로컬 개발 서버 실행 (http://localhost:5173)
-npm start      # npm run dev와 동일
+npm run build   # 프로젝트 상세 정적 페이지, sitemap, robots 생성
+npm run check   # 생성 후 콘텐츠·에셋·SEO 검증
+npm run dev     # http://localhost:5173 정적 서버
 ```
 
-Python 내장 HTTP 서버를 사용하므로 Python 3가 설치되어 있어야 함.
+## 제품 목적
 
-## 아키텍처
+이 사이트는 이혁수의 PM·제품 개발·디자인·미디어 경력을 `문제 → 판단 → 과정 → 결과 → 근거`로 보여주는 근거 중심 포트폴리오다. 고객사·비공개 자료는 수치와 공개 범위를 분리하며, 확인할 수 없는 성과를 만들지 않는다.
 
-빌드 과정이나 프레임워크 없이 순수 HTML/CSS/JS로 구성된 정적 포트폴리오 웹사이트.
-GitHub Pages로 배포: `https://hyeoksu1234.github.io/portfolio_website/`
+## 구조
 
-### 파일 구조 (SPA-style 단일 페이지)
+- `index.html` — 홈, 검증 수치, 선별 프로젝트, 업무 원칙, 경력
+- `data.js` — 9개 프로젝트의 단일 콘텐츠 원본
+- `projects/index.html` — 역할별 프로젝트 목록(생성 파일)
+- `projects/{id}/index.html` — 검색 가능한 정적 case study(생성 파일)
+- `scripts/generate-site.js` — 프로젝트 페이지, sitemap, robots 생성
+- `scripts/check-site.js` — 필수 필드, 이미지, 경로, canonical, JSON-LD 검증
+- `main.js` — 테마, 메뉴, 애니메이션
+- `projects.js` — 목록 카드와 필터
+- `styles.css` — 공통 디자인 토큰과 반응형 스타일
+- `project.html` / `project.js` — 이전 쿼리 주소를 clean route로 이동
 
-- **index.html** - 전체 사이트 (Hero → Projects → About → Footer)
-- **styles.css** - 모든 스타일 (CSS custom properties로 다크/라이트 테마)
-- **main.js** - 모든 인터랙션 (프로젝트 데이터, 카드 렌더링, 필터, 모달, 스크롤 애니메이션, 테마 토글)
+## 콘텐츠 원칙
 
-### 테마 시스템
+프로젝트마다 아래를 유지한다.
 
-- `[data-theme="dark"]`로 다크 모드 전환, `localStorage`에 저장
-- `prefers-color-scheme` 미디어 쿼리로 시스템 설정 자동 감지
-- `<head>` 인라인 스크립트로 FOUC 방지
+1. 발견한 문제와 맥락
+2. 본인이 내린 판단과 이유·trade-off
+3. 단계별 실행 과정
+4. Before/After와 정량 결과
+5. 공개·내부·비공개로 구분한 근거
+6. 공개 가능할 때만 GitHub 저장소 링크
 
-### 프로젝트 데이터
+## 이미지
 
-`main.js` 상단의 `projects` 배열에 11개 프로젝트 정의. 각 프로젝트: id, title, subtitle, category, role, period, stack, liveUrl, githubUrl, thumbnail, details, lesson.
-
-### 카테고리 필터
-
-`data-filter` 속성으로 분류: `all`, `dev`, `design`, `pd`. "All" 뷰: Dev → Design → PD 순서.
-
-### 모달 시스템
-
-- `#project-{id}` URL 해시로 모달 열기/닫기
-- `history.pushState`/`popstate`로 브라우저 뒤로가기 지원
-- 포커스 트랩, ESC 닫기, 오버레이 클릭 닫기
-
-### 애니메이션
-
-- `.animate-in` + `.visible` 클래스로 스크롤 트리거 (IntersectionObserver)
-- `--delay` CSS 커스텀 프로퍼티로 스태거 딜레이
-- `cubic-bezier(0.16, 1, 0.3, 1)` 시네마틱 커브
-- `prefers-reduced-motion: reduce` 지원
-
-### 이미지 구조
-
-- `img/my_photo/` - 프로필 사진
-- `img/project/{name}/` - 프로젝트별 이미지 (q-align, smu, macc, fb, platform, indicator, team, branding, logo, poster, pd)
-
-### 외부 의존성
-
-- Pretendard Variable (CDN) - 한글 본문
-- Google Fonts: Libre Baskerville (영문 디스플레이), Fira Code (모노스페이스)
+페이지는 WebP 최적화본만 참조한다. 원본 PNG/JPG는 과거 작업 보존용으로 Git에 남기고 `.vercelignore`로 배포에서 제외한다. Open Graph 이미지만 `img/my_photo/projects-og.jpg`를 사용한다.
