@@ -340,40 +340,46 @@ var projects = [
   },
   {
     id: 'pd-projects',
-    title: 'YouTube PD Projects',
-    subtitle: '기획·촬영·편집을 한 흐름으로 운영한 콘텐츠 제작 이력',
+    title: 'PD · Video Production Archive',
+    subtitle: '카론크리에이티브·다니엘 프로젝트·Pranky Friends에서 수행한 영상 제작·편집 이력',
     category: 'media',
-    role: 'Content Project Lead · Planning & Direction',
-    period: '2020 — 2022',
+    role: 'YouTube PD · Video Production & Editorial',
+    period: '2020.03 — 2022.03',
     status: '경력 아카이브',
     featured: false,
-    stack: ['Content Strategy', 'Premiere Pro', 'After Effects', 'Cinema 4D'],
-    repository: { status: 'evidence-only', label: 'GitHub · PD case archive', url: 'https://github.com/hyeoksu1234/portfolio_website/blob/main/design/pd.html', note: '영상 링크와 제작 이력을 보존한 공개 아카이브입니다.' },
+    stack: ['Content Planning', 'Field Production', 'Premiere Pro', 'After Effects', 'Photoshop'],
+    repository: { status: 'evidence-only', label: 'GitHub · PD evidence audit', url: 'https://github.com/hyeoksu1234/portfolio/blob/main/docs/evidence/pd-career-source-audit.md', note: '코드 저장소가 아닌, 34쪽 PD 포트폴리오의 수치·역할·공개 링크를 개인정보 없이 정리한 검증 메모입니다.' },
     thumbnail: '/img/project/pd/1.webp',
     images: ['/img/project/pd/1.webp'],
-    summary: '사회적 메시지와 대중적 전달력을 함께 설계하며 콘텐츠의 기획, 현장 촬영, 편집과 발행을 반복 운영했습니다.',
-    contribution: '아이템 기획, 촬영 디렉션, 편집, 모션 그래픽, 채널 운영 협업',
-    problem: { title: '좋은 메시지도 시청자가 끝까지 보지 않으면 전달되지 않습니다.', body: '사회적 주제와 인물의 이야기를 자극적으로 소비하지 않으면서도, 초반 훅과 전개 리듬으로 대중에게 도달하게 만들어야 했습니다.', points: ['기획 의도와 시청 지속을 함께 고려해야 했습니다.', '현장 변수와 후반 편집을 하나의 제작 일정으로 관리해야 했습니다.', '영상별 역할과 성과를 공개 근거와 연결해야 했습니다.'] },
+    summary: 'Pranky Friends에서 14편의 기획·섭외·촬영·편집을 맡았고, 카론크리에이티브에서는 피닉스박 영상 70편+의 소스 선별·편집·썸네일을 담당했습니다. 다니엘 프로젝트의 촬영·편집과 MV 촬영 보조 이력은 이 최소 합계와 별도로 기록합니다.',
+    contribution: 'Pranky Friends · 기획, 장소·연기자 섭외, 촬영, 편집, 썸네일 | 카론크리에이티브 · 소스 선별, 편집, 썸네일 및 스튜디오 콘텐츠 촬영·편집 | 다니엘 프로젝트 · 스튜디오·조명 세팅, 촬영·편집, 교육 콘텐츠 편집 및 MV 촬영 보조',
+    problem: { title: '하나의 “PD 제작” 표현으로 묶이면서 프로젝트별 실제 역할과 전체 제작 규모가 흐려졌습니다.', body: '기존 페이지는 공개 링크 3편의 조회수에 초점을 맞춰 그것이 전체 제작 건수처럼 보였습니다. 또한 전 과정 제작, 반복 편집, 촬영 보조를 같은 기여도로 서술해 증거와 역할이 정확히 대응하지 않았습니다.', points: ['Pranky Friends는 14편의 기획·섭외·촬영·편집·썸네일을 맡았습니다.', '피닉스박은 70편+의 소스 선별·편집·썸네일을 담당했습니다.', '다니엘 프로젝트는 채널·교육 영상 촬영·편집과 MV 촬영 보조로 범위를 구분합니다.'] },
     decisions: [
-      { title: '기획–촬영–편집을 한 사람이 끝까지 연결', rationale: '현장에서 얻은 맥락을 편집 리듬과 메시지 손실 없이 이어가기 위해서입니다.' },
-      { title: '사회적 메시지와 대중적 포맷의 균형', rationale: '주제의 존중을 지키면서도 더 많은 시청자에게 도달하기 위해서입니다.' }
+      { title: '대표작 수와 전체 제작 건수를 분리', rationale: '3개 공개 링크는 샘플일 뿐이며, 원본 PDF로 확인되는 최소 제작·편집 이력은 84편+이기 때문입니다.' },
+      { title: '프로젝트별 기여 범위를 따로 표기', rationale: '기획부터 편집까지 맡은 작업과 편집 중심·촬영 보조 작업을 같은 소유 범위로 보이지 않게 하기 위해서입니다.' },
+      { title: '현재 조회수 합산보다 원본 문서 기준을 우선', rationale: '일부 공개 영상의 현재 조회수만 합산하면 전체 PD 경력의 규모와 당시 성과를 왜곡할 수 있기 때문입니다.', tradeoff: '2,000만+ 누적 조회는 당시 PDF 원문 기재 수치로 표시하며, 독립 재검증 수치처럼 표현하지 않습니다.' }
     ],
     process: [
-      { stage: '01', title: '아이템·구성', description: '인물과 상황의 핵심 메시지, 초반 훅, 전체 전개를 설계했습니다.' },
-      { stage: '02', title: '촬영·디렉션', description: '현장 상황에 맞춰 장면과 인터뷰를 확보하고 후반 편집을 고려해 운영했습니다.' },
-      { stage: '03', title: '편집·발행', description: '리듬, 자막, 모션 그래픽과 피드백을 반영해 채널 포맷에 맞게 완성했습니다.' }
+      { stage: '01', title: 'Pranky Friends', period: '2020.03 — 2021.01', description: '14편에서 아이템 기획, 장소·연기자 섭외, 촬영, 편집, 썸네일 제작까지 전 과정을 수행했습니다.' },
+      { stage: '02', title: '다니엘 프로젝트', period: '2021.02 — 2021.06', description: '그렉형·gru:v의 스튜디오·조명 세팅과 촬영·편집, enSOUND 교육·홍보 영상 편집, 백다연 MV 촬영 보조를 수행했습니다.' },
+      { stage: '03', title: '카론크리에이티브', period: '2021.09 — 2022.03', description: '피닉스박 영상 70편+의 소스 선별·편집·썸네일을 맡고, 피닉스박·괴물쥐 스튜디오 콘텐츠의 촬영·편집·썸네일 제작에 참여했습니다.' }
     ],
     outcomes: [
-      { value: '323만+', label: '대표 영상 현재 조회수', before: '기획·제작', after: '공개 영상 VHVnlArD4ro 도달', source: 'YouTube 공개 viewCount · 2026.07.15' },
-      { value: '377만+', label: '연결된 3편 합산 조회', before: '3개 개별 제작물', after: '3,775,858 views 확인', source: 'YouTube 공개 viewCount 합산 · 2026.07.15' },
-      { value: 'Forbes', label: '사회적 메시지 사례 소개', before: 'Pranky Friends 채널 운영', after: '2020 대한민국 파워 유튜버 100 특집 기사에 소개', source: 'Forbes Korea 기사' }
+      { value: '84편+', label: 'PDF로 확인되는 최소 제작·편집 이력', before: '대표 공개 영상 3편만 노출', after: '피닉스박 70편+와 Pranky Friends 14편을 역할별로 분리', source: '사용자 제공 PD 포트폴리오 PDF · 2쪽, 5쪽' },
+      { value: '70편+', label: '피닉스박 편집·썸네일', before: '방송 편집 경력으로만 요약', after: '소스 선별·편집·썸네일과 최소 편수를 함께 명시', source: '사용자 제공 PD 포트폴리오 PDF · 5쪽' },
+      { value: '14편', label: 'Pranky Friends 전 과정 제작', before: '대표작 3편만 연결', after: '기획·섭외·촬영·편집·썸네일을 맡은 전체 편수 명시', source: '사용자 제공 PD 포트폴리오 PDF · 2쪽, 14~20쪽' },
+      { value: '2,000만+', label: '당시 포트폴리오 기재 누적 조회', before: '2020—2022 YouTube PD 활동', after: '총 조회수 최소 2,000만 회 이상으로 기재', source: '사용자 제공 PD 포트폴리오 PDF · 2쪽 원문 수치' }
     ],
     evidence: [
-      { label: 'PD 공개 case archive', type: 'github', url: 'https://github.com/hyeoksu1234/portfolio_website/blob/main/design/pd.html', access: 'public', detail: '제작 이력과 연결 영상 원본' },
-      { label: '대표 영상 3편', type: 'video', access: 'public-record', detail: '현재 조회수 3,235,820 · 272,909 · 267,129 확인' },
-      { label: 'Forbes Korea 특집 기사', type: 'article', url: 'https://www.forbeskorea.co.kr/news/articleView.html?idxno=331116', access: 'public', detail: '프랭키프렌즈를 사회적 메시지 사례로 소개' }
+      { label: 'PD 포트폴리오 원본 · 34쪽', type: 'document', access: 'private', detail: '경력 기간, 70편+ 편집, Pranky Friends 14편, 프로젝트별 기여 범위를 확인했습니다. 개인정보가 포함돼 원본은 공개하지 않습니다.' },
+      { label: '피닉스박 편집 영상 목록', type: 'document', access: 'private', detail: 'PDF 5쪽에 YouTube 작업 링크 목록, 소스 선별·편집·썸네일 기여, 총 70편+ 제작 표기가 있습니다.' },
+      { label: 'Pranky Friends · 전동휠체어 사회실험', type: 'video', url: 'https://youtu.be/IgnvkDmPpwc', access: 'public-record', detail: 'PDF 당시 약 264만 회 · 기획, 섭외, 촬영, 편집, 썸네일' },
+      { label: 'Pranky Friends · 외국인 차별 사회실험', type: 'video', url: 'https://youtu.be/VHVnlArD4ro', access: 'public-record', detail: 'PDF 당시 약 243만 회 · 기획, 섭외, 촬영, 편집, 썸네일' },
+      { label: 'Pranky Friends · 지체장애인 사회실험', type: 'video', url: 'https://youtu.be/EeLVUAwJ21w', access: 'public-record', detail: 'PDF 당시 약 135만 회 · 기획, 섭외, 촬영, 편집, 썸네일' },
+      { label: '다니엘 프로젝트 · 그렉형 촬영·편집', type: 'video', url: 'https://youtu.be/VUBAuk05Q_8', access: 'public-record', detail: '스튜디오·조명 세팅, 촬영, 편집 참여를 확인할 수 있는 대표 공개 영상' },
+      { label: 'Forbes Korea 특집 기사', type: 'article', url: 'https://www.forbeskorea.co.kr/news/articleView.html?idxno=331116', access: 'public', detail: '개인 수상이 아니라 Pranky Friends를 사회적 메시지 콘텐츠 사례로 소개한 기사입니다.' }
     ],
-    lesson: '콘텐츠 제작에서 배운 훅, 흐름, 피드백 감각은 지금도 제품의 정보 구조와 이해관계자 커뮤니케이션에 쓰이고 있습니다.'
+    lesson: '콘텐츠 제작 이력도 제품 성과와 같습니다. 대표작만 보여주는 것보다 전체 규모, 프로젝트별 역할, 공개 가능한 근거와 원본 문서의 한계를 분리해야 다음 사람이 같은 사실을 재검증할 수 있습니다.'
   }
 ];
 

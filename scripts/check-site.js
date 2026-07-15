@@ -56,9 +56,16 @@ textFiles.forEach((file) => {
 const homeHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 check(homeHtml.includes('Product Manager Portfolio'), 'index.html: PM positioning missing');
 check(homeHtml.includes('FILA Korea 자사몰 운영·개선 PM'), 'index.html: current PM experience missing');
+check(homeHtml.includes('다니엘 프로젝트 PD'), 'index.html: Daniel Project PD experience missing');
 ['Product Builder', '프론트엔드 개발자', '디자이너 출신 개발자'].forEach((phrase) => {
   check(!homeHtml.includes(phrase), `index.html: developer-first phrase remains (${phrase})`);
 });
+
+const pdHtml = fs.readFileSync(path.join(root, 'projects', 'pd-projects', 'index.html'), 'utf8');
+['84편+', '70편+', '14편', '2,000만+'].forEach((metric) => {
+  check(pdHtml.includes(metric), `pd-projects: verified metric missing (${metric})`);
+});
+check(!pdHtml.includes('대표 영상 3편'), 'pd-projects: public samples are still presented as the total body of work');
 
 if (errors.length) {
   console.error(errors.map((error) => `- ${error}`).join('\n'));

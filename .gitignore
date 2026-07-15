@@ -4,6 +4,7 @@
 # Tool artifacts
 .playwright-mcp/
 .superpowers/
+/tmp/
 
 # Node
 node_modules/
