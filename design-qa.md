@@ -11,7 +11,29 @@ final result: passed
 - Original projects capture: `/private/tmp/portfolio-original-projects-1440.png`
 - Original detail capture: `/private/tmp/portfolio-original-detail-1440.png`
 - Production URL: `https://portfolio-hyeoksu.vercel.app/`
-- Implementation commit: `cdd0b2eacf6912125f528dc1df46d5144372e133`
+- Implementation commits:
+  - PM-first original-design restoration: `cdd0b2eacf6912125f528dc1df46d5144372e133`
+  - About portrait aspect-ratio correction: `ad434b645a1f7efe61d93a5c8765d00c84f7a321`
+
+## About portrait correction
+
+- User-reported evidence:
+  - `/private/tmp/portfolio-about-user-report-closeup.png`
+  - `/private/tmp/portfolio-about-user-report-section.png`
+- Visual and dimensional source of truth: the original `c62d066` About layout and the portrait's intrinsic `720 × 915` ratio.
+- Before capture, 1440 × 900, light theme, About section: `/private/tmp/portfolio-about-before-1440.png`
+- After capture, 1440 × 900, light theme, About section: `/private/tmp/portfolio-about-after-1440.png`
+- Mobile after capture, 390 × 844, light theme, About section: `/private/tmp/portfolio-about-after-390.png`
+- Full-view before/after comparison: `/private/tmp/portfolio-about-before-after-full.png`
+- Focused portrait-region comparison: `/private/tmp/portfolio-about-before-after-focus.png`
+- Before: the image rendered at `240 × 915`, ratio `0.2623`, because the HTML height hint remained fixed after CSS reduced the width.
+- Fix: `.about-photo img { height: auto; }` while retaining width and height attributes for layout stability.
+- After desktop: `240 × 305`, ratio `0.786885`, exactly matching the intrinsic image ratio.
+- After mobile: `342 × 434.625`, ratio `0.786885`; no horizontal overflow and no broken images.
+- Image quality and crop now show the intended upper-body portrait without facial over-cropping or distortion.
+- Typography, spacing tokens, colors, copy, navigation, and the rest of the original visual system are unchanged.
+- Browser warning/error logs after the fix: none.
+- Findings after the post-fix comparison: no actionable P0, P1, or P2 mismatch.
 
 ## Comparison inputs
 
@@ -69,4 +91,4 @@ The browser's stitched full-page mobile capture duplicated the fixed header and 
 3. Deployed commit `cdd0b2e`, repeated the three comparisons against production, and found no blocking visual drift.
 4. Tested desktop theme/filter/navigation states and mobile menu/filter/content states.
 5. Verified all public routes, legacy redirects, and the custom 404 response.
-
+6. Found the About portrait rendered at `240 × 915`, added automatic height calculation, deployed commit `ad434b6`, and repeated full-view plus focused-region comparisons. The final `240 × 305` desktop frame and `342 × 434.625` mobile frame match the portrait's intrinsic ratio.
