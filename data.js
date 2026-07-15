@@ -82,7 +82,7 @@ var projects = [
     title: 'Q-ALIGN',
     subtitle: '조직 정렬을 측정·분석하는 B2B SaaS 플랫폼',
     category: 'product',
-    role: 'Co-founder & CEO · Product, Design, Full-stack',
+    role: 'Co-founder & CEO · Product Strategy & Delivery',
     period: '2025 — 현재',
     status: '검증 중',
     featured: true,
@@ -130,7 +130,7 @@ var projects = [
     title: '상명대학교 졸업전시',
     subtitle: '97명·194개 작품 데이터를 연결한 디지털 아카이브',
     category: 'product',
-    role: 'Team Lead · Product Design & Development',
+    role: 'Project Lead · Product Planning & Delivery',
     period: '2025',
     status: '운영 완료',
     featured: true,
@@ -173,7 +173,7 @@ var projects = [
     title: 'Designer × Code',
     subtitle: '디자이너가 직접 제품을 만드는 바이브 코딩 커뮤니티',
     category: 'product',
-    role: 'Founder & Instructor · Product, Design, Development, Operations',
+    role: 'Founder · Community Product & Operations',
     period: '2025 — 현재',
     status: '운영 중',
     featured: true,
@@ -208,7 +208,7 @@ var projects = [
     title: 'MA-CC 코칭 & 컨설팅',
     subtitle: '전문 서비스의 신뢰와 문의 전환을 연결한 기업 웹사이트',
     category: 'product',
-    role: 'Independent · Strategy, Design & Development',
+    role: 'Independent PM · Service Strategy & Delivery',
     period: '2025',
     status: '운영 중',
     featured: false,
@@ -244,7 +244,7 @@ var projects = [
     title: '코인·주식 인디케이터',
     subtitle: '노이즈와 리스크를 함께 다루는 TradingView 보조지표',
     category: 'product',
-    role: 'Independent · Product Logic & Development',
+    role: 'Independent · Product Planning & Validation',
     period: '2024',
     status: '프로토타입',
     featured: false,
@@ -274,7 +274,7 @@ var projects = [
     title: 'Linkus',
     subtitle: '열정과 역량을 연결하는 공모전 팀원 매칭 UX',
     category: 'design',
-    role: 'UX Research & Product Design',
+    role: 'Product Discovery & UX Design',
     period: '2022',
     status: 'UX 프로토타입',
     featured: false,
@@ -318,7 +318,7 @@ var projects = [
     title: 'Brand Identity Collection',
     subtitle: '로고와 응용 체계로 정리한 브랜드 디자인 작업',
     category: 'design',
-    role: 'Brand Designer',
+    role: 'Brand Strategy & Design',
     period: 'Selected works',
     status: '아카이브',
     featured: false,
@@ -343,7 +343,7 @@ var projects = [
     title: 'YouTube PD Projects',
     subtitle: '기획·촬영·편집을 한 흐름으로 운영한 콘텐츠 제작 이력',
     category: 'media',
-    role: 'YouTube PD · Planning, Direction & Editing',
+    role: 'Content Project Lead · Planning & Direction',
     period: '2020 — 2022',
     status: '경력 아카이브',
     featured: false,
@@ -379,10 +379,10 @@ var projects = [
 
 var categoryOrder = { pm: 0, product: 1, design: 2, media: 3 };
 var categoryLabels = {
-  pm: 'Product Management',
-  product: 'Product & Development',
-  design: 'Design',
-  media: 'Media'
+  pm: 'PM & Operations',
+  product: 'Product Strategy',
+  design: 'UX & Design',
+  media: 'Content & Direction'
 };
 
 if (typeof module !== 'undefined' && module.exports) {

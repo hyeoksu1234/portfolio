@@ -8,6 +8,7 @@ img/**/*.jpeg
 # Keep source notes and editor settings out of the public deployment.
 docs/
 CLAUDE.md
+design-qa.md
 .vscode/
 
 # Avoid cleanUrls resolving /projects/ to the legacy redirect page.

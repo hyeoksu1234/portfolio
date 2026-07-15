@@ -35,6 +35,9 @@ projects.forEach((project) => {
     check(html.includes(`<link rel="canonical" href="https://portfolio-hyeoksu.vercel.app/projects/${project.id}/">`), `${project.id}: canonical mismatch`);
     check(html.includes('<h1 class="project-title">'), `${project.id}: h1 missing`);
     check(html.includes('application/ld+json'), `${project.id}: JSON-LD missing`);
+    ['Problem', 'Decision', 'Process', 'Outcome', 'Evidence', 'Repository'].forEach((label) => {
+      check(html.includes(label), `${project.id}: ${label} section missing`);
+    });
   }
 });
 
@@ -48,6 +51,13 @@ textFiles.forEach((file) => {
   if (!fs.existsSync(target)) return;
   const content = fs.readFileSync(target, 'utf8');
   check(!content.includes('hyeoksu1234.github.io/portfolio_website'), `${file}: old GitHub Pages URL remains`);
+});
+
+const homeHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+check(homeHtml.includes('Product Manager Portfolio'), 'index.html: PM positioning missing');
+check(homeHtml.includes('FILA Korea 자사몰 운영·개선 PM'), 'index.html: current PM experience missing');
+['Product Builder', '프론트엔드 개발자', '디자이너 출신 개발자'].forEach((phrase) => {
+  check(!homeHtml.includes(phrase), `index.html: developer-first phrase remains (${phrase})`);
 });
 
 if (errors.length) {
