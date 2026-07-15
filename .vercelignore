@@ -9,3 +9,6 @@ img/**/*.jpeg
 docs/
 CLAUDE.md
 .vscode/
+
+# Avoid cleanUrls resolving /projects/ to the legacy redirect page.
+projects.html
